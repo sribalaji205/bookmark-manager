@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookmark Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+
+  <body class="antialiased font-serif">
+    <div class="text-center text-stone-500 text-3xl font-bold py-6">
+      BOOKMARK MANAGER
+    </div>
+    <div class="flex justify-center">
+      <form
+        class="bg-slate-200 shadow-md md:w-9/12 lg:w-9/12 xl:w-9/12 w-11/12 rounded px-8 pt-6 pb-8 mb-4"
+      >
+        <div class="grid lg:grid-cols-2 xl:grid-cols-2 lg:gap-6 xl:gap-6">
+          <input
+            type="text"
+            class="shadow mb-4 appearance-none border-b-2 border-sky-500 focus:border-b-4 focus:border-emerald-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none"
+            id="title"
+            placeholder="Enter Title"
+            required
+          />
+          <input
+            type="text"
+            class="shadow mb-4 appearance-none border-b-2 border-sky-500 focus:border-b-4 focus:border-emerald-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="url"
+            placeholder="Enter URL"
+            required
+          />
+        </div>
+        <div class="grid lg:grid-cols-2 xl:grid-cols-2 lg:gap-6 xl:gap-6">
+          <input
+            type="text"
+            class="shadow mb-4 appearance-none border-b-2 border-sky-500 focus:border-b-4 focus:border-emerald-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="category"
+            placeholder="Enter Category"
+            required
+          />
+          <input
+            type="text"
+            class="shadow mb-4 appearance-none border-b-2 border-sky-500 focus:border-b-4 focus:border-emerald-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="tags"
+            placeholder="Enter Tags - Comma Separated"
+            required
+          />
+        </div>
+
+        <div id="date"></div>
+        <div class="flex justify-center gap-6 mt-5">
+          <input
+            class="cursor-pointer bg-slate-500 hover:bg-slate-700 text-white font-bold py-1 px-8 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            type="button"
+            value="ADD"
+            onclick="add();"
+          />
+          <input
+            class="cursor-pointer bg-slate-500 hover:bg-slate-700 text-white font-bold py-1 px-6 border-b-4 border-blue-700 hover:border-blue-500 rounded"
+            type="reset"
+            value="RESET"
+          />
+        </div>
+        <!-- <div class="mt-8 flex justify-center">
+                <div class="flex items-center bg-white w-5/12 rounded-md p-0.5">
+                    <input type="text" id="search" oninput="searchTitle();" name="name" placeholder="Search" class="w-full py-2 border-b-4 border-green-400 outline-none focus:border-orange-400">
+                </div>
+            </div> -->
+      </form>
+    </div>
+
+    <div class="flex w-full justify-center">
+      <div
+        class="holders bg-slate-200 shadow-md md:w-9/12 lg:w-9/12 xl:w-9/12 w-10/12 rounded px-5 pt-4 pb-4 mb-4"
+      >
+        <div
+          class="w-full font-semibold border-2 border-cyan-400 block bg-white my-4 rounded-md relative"
+        >
+          <div class="py-1 w-11/12 ml-2">
+            <span class="title"></span>
+            <span
+              ><input
+                type="text"
+                class="input rounded hidden m-1 border-b-2 border-sky-500 outline-none focus:border-red-500"
+            /></span>
+            <a href="#" target="_blank" class="text-blue-700 ml-2 url"></a>
+            <span
+              ><input
+                type="text"
+                class="input rounded hidden ml-3 mt-1 border-b-2 border-sky-500 outline-none focus:border-red-500"
+            /></span>
+          </div>
+          <div class="py-1">
+            <span class="category ml-2"></span
+            ><span
+              ><input
+                type="text"
+                class="input rounded hidden m-1 border-b-2 border-sky-500 outline-none focus:border-red-500"
+            /></span>
+          </div>
+          <div class="ml-3 py-1 w-full">
+            <div class="tags flex flex-row flex-wrap">
+              <div
+                class="border-cyan-500 border-2 bg-slate-200 px-1 py-1 block rounded m-1 tag relative hidden"
+              >
+                <span class="text px-1 mr-5"></span>
+                <span
+                  class="icon cursor-pointer px-1 absolute text-sm top-1.5 right-1"
+                  onclick="tagRemove();"
+                  >&#10006;</span
+                >
+              </div>
+            </div>
+            <span
+              ><input
+                type="text"
+                class="input rounded hidden border-b-2 border-sky-500 outline-none focus:border-red-500"
+            /></span>
+          </div>
+          <div class="date text-xs p-2">&nbsp;&nbsp;</div>
+          <div
+            class="cursor-pointer options absolute top-1 right-3 text-lg font-bold"
+            id="options"
+            onclick="showOptionbar();"
+          >
+            &#8942;
+          </div>
+          <div
+            class="cursor-pointer saver absolute bottom-1 right-3 text-lg font-bold hidden"
+            id="save"
+            onclick="saveInput();"
+          >
+            &#128427;
+          </div>
+          <div
+            id="optionbar"
+            class="optionbar flex justify-center py-1 rounded bg-slate-300 absolute top-1.5 right-1 text-sm invisible"
+          >
+            <div
+              class="cursor-pointer pl-1 pr-1 hover:bg-sky-200 hover:rounded"
+              id="delete"
+              onclick="remove();"
+            >
+              Delete
+            </div>
+            |
+            <div
+              class="text-blue cursor-pointer pl-1 pr-1 hover:bg-sky-200 hover:rounded"
+              id="edit"
+              onclick="openEditInput();"
+            >
+              Edit
+            </div>
+            |
+            <div
+              class="cursor-pointer pl-1 pr-1 hover:bg-sky-200 hover:rounded"
+              id="copy"
+              onclick="copyText();"
+            >
+              Copy Url
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript " src="new1script.js "></script>
+  </body>
+</html>
