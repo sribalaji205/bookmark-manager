@@ -222,8 +222,8 @@ tagRemove = () => {
     node_index = Array.from(parent_node.parentNode.children).indexOf(parent_node);
     tagIndex = Array.from(tagTarget.parentNode.children).indexOf(tagTarget);
     console.log(node_index + " " + tagIndex);
-
-    arr[node_index - 1][3].splice(tagIndex - 1, 1);
+console.log(arr[node_index-1][3])
+    arr[node_index-1][3].splice(tagIndex - 1, 1);
 
     tagTarget.parentNode.removeChild(tagTarget);
     localStorage.setItem("arrays", JSON.stringify(arr));
